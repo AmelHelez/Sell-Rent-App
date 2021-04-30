@@ -1,12 +1,31 @@
-<div class="row">
-  <div class="shadow-lg col-sm-4 p-3">
-  <div class="card">
-    <img class="propImg" src="assets/images/house_default.png">
-    <div class="card-body p-2">
-  <h1>{{Property.Name}}</h1>
-  <h2>{{Property.Type}}</h2>
-  <h3>{{Property.Price}}</h3>
-    </div>
+<div class="card">
+  <div class="card-img-wrapper">
+    <img *ngIf="property_name.Image" class="card-img-top" src="assets/images/{{property_name.Image}}.png">
+    <img *ngIf="!property_name.Image" class="card-img-top" src="assets/images/house_default.png" >
+    <ul *ngIf="!hideIcons" class="list-inline text-center member-icons animate">
+      <li class="list-inline-item">
+        <button class="btn btn-primary" routerLink="/property-detail/{{property_name.Id}}"><i class="far fa-edit"></i></button>
+      </li>
+      <li class="list-inline-item">
+        <button class="btn btn-primary"><i class="far fa-address-book"></i></button>
+      </li>
+    </ul>
   </div>
-</div>
+    <div class="card-body p-1">
+        <h1 class="mb-0">{{property_name.BHK}} BHK {{property_name.PType}}</h1>
+
+        in {{property_name.Name}}
+       <span *ngIf="property_name.Name">,</span>
+       {{property_name.City}}
+
+       <h6 class="mt-2">{{property_name.FType}}
+         <span *ngIf="property_name.FType !== 'Unfurnished'">Furnished</span> | Ready to Move
+       </h6>
+
+       <hr class="mt-0 mb-2">
+
+       <h6 class="mb-0">Price: <span class="font-highlight">{{property_name.Price}} USD.</span> |
+        Area: <span class="font-highlight">{{property_name.BuiltArea}} Sq Ft</span>
+      </h6>
+    </div>
 </div>
