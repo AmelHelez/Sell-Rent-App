@@ -4,16 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace backend.Models
+namespace backend.Dtos
 {
-    public class City
+    public class CityDto
     {
         public int ID { get; set; }
         public string Name { get; set; }
 
         [Required]
         public string Country { get; set; }
-        public DateTime LastUpdatedOn { get; set; }
-        public int LastUpdatedBy { get; set; }
     }
 }

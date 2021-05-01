@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using backend.Data;
+using backend.Dtos;
 using backend.Interfaces;
 using backend.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +20,7 @@ namespace backend.Controllers
     public class CityController : ControllerBase
     {
         private readonly IUnitOfWork uow;
+        private readonly IMapper mapper;
 
         /*private readonly ICityRepository repo;
 
@@ -25,9 +30,10 @@ public CityController(ICityRepository repo)
 this.repo = repo;
 }*/
 
-        public CityController(IUnitOfWork uow)
+        public CityController(IUnitOfWork uow, IMapper mapper)
         {
             this.uow = uow;
+            this.mapper = mapper;
         }
 
         //GET api/city
@@ -36,14 +42,17 @@ this.repo = repo;
         {
             // return new string[] { "Bugojno", "Sarajevo", "Konjic", "Kljuc" };
             var cities = await uow.CityRepository.GetCitiesAsync();
-            return Ok(cities);
-        }
 
-    /*    [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "Bugojno";
-        }*/
+            /*var citiesDto = from c in cities
+                            select new CityDto()
+                            {
+                                ID = c.ID,
+                                Name = c.Name
+                            };
+            */
+            var citiesDto = mapper.Map<IEnumerable<CityDto>>(cities);
+            return Ok(citiesDto);
+        }
 
 
         //POST api/city/add?cityName=Kupres
@@ -53,13 +62,55 @@ this.repo = repo;
         [HttpPost("add/{cityName}")]
         // public async Task<IActionResult> AddCity(string cityName)
 
-        public async Task<IActionResult> AddCity(City city)
+        public async Task<IActionResult> AddCity(CityDto cityDto)
         {
-           // City city = new City();
+            // City city = new City();
             //city.Name = cityName;
+            /*var city = new City
+            {
+                Name = cityDto.Name,
+                LastUpdatedBy = 1,
+                LastUpdatedOn = DateTime.Now
+            };*/
+            var city = mapper.Map<City>(cityDto);
+            city.LastUpdatedOn = DateTime.Now;
+
             uow.CityRepository.AddCity(city);
             await uow.SaveAsync();
             return StatusCode(201); //test
+        }
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateCity(int id, CityDto cityDto)
+        {
+            var cityFromDb = await uow.CityRepository.FindCity(id);
+            cityFromDb.LastUpdatedBy = 1;
+            cityFromDb.LastUpdatedOn = DateTime.Now;
+            mapper.Map(cityDto, cityFromDb); //source i destination
+            await uow.SaveAsync();
+            return StatusCode(200);
+        }
+
+        [HttpPut("updateCityName/{id}")]
+        public async Task<IActionResult> UpdateCityName(int id, CityDto cityDto)
+        {
+            var cityFromDb = await uow.CityRepository.FindCity(id);
+            cityFromDb.LastUpdatedBy = 1;
+            cityFromDb.LastUpdatedOn = DateTime.Now;
+            mapper.Map(cityDto, cityFromDb); //source i destination
+            await uow.SaveAsync();
+            return StatusCode(200);
+        }
+
+        [HttpPatch("update/{id}")]
+        public async Task<IActionResult> UpdateCityPatch(int id, JsonPatchDocument<City> cityToPatch)
+        {
+            var cityFromDb = await uow.CityRepository.FindCity(id);
+            cityFromDb.LastUpdatedBy = 1;
+            cityFromDb.LastUpdatedOn = DateTime.Now;
+            cityToPatch.ApplyTo(cityFromDb, ModelState);
+            await uow.SaveAsync();
+            return StatusCode(200);
         }
 
 
