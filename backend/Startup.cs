@@ -15,6 +15,11 @@ using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using backend.Helpers;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using backend.Extensions;
+using backend.Middlewares;
 
 namespace backend
 {
@@ -41,10 +46,10 @@ namespace backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+
+            app.ConfigureExceptionHandler(env);
+
+            //app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseRouting();
 
