@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "mgEIyjQrUJDLRa2flQ2zL4RSky6eJY2+4SVlEscpIvmllpzF96T+FazG6TKGcBxMtpvi6pVHVizcSlZOu4tFuw==",
+  "dgSpecHash": "PTn8m1y8rz8uM1tJLFF/W4/zvg4natgP4BkKDuMHOs7GCl5g1cUevRVOWoN4r83M2MtOSzvZrtCRXgd9PjNgCQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Amel\\My Projects\\Angular projects\\SellRent App\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Amel\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Amel\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\Amel\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Amel\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.14\\microsoft.aspnetcore.authentication.jwtbearer.3.1.14.nupkg.sha512",
     "C:\\Users\\Amel\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.8\\microsoft.aspnetcore.jsonpatch.3.1.8.nupkg.sha512",
     "C:\\Users\\Amel\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.8\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.8.nupkg.sha512",
     "C:\\Users\\Amel\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

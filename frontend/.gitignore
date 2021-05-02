@@ -44,3 +44,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Pictures
+/src/assets/images/internal-1.jpg
+/src/assets/images/internal-2.jpg
+/src/assets/images/internal-3.jpg
+/src/assets/images/internal-4.jpg
+/src/assets/images/internal-5.jpg
+
