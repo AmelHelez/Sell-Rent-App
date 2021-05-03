@@ -14,6 +14,7 @@ namespace backend.Models
         public string Username { get; set; }
 
         [Required]
-        public string Password { get; set; } //will be changed to another type
+        public byte[] Password { get; set; } //will be changed to another type
+        public byte[] PasswordKey { get; set; }
     }
 }
